@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  body { margin: 0; }
+  * { box-sizing: border-box; }
+  ::selection { background: oklch(88% 0.05 280); }
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;background:oklch(98.5% 0.004 260);font-family:'Pretendard',sans-serif;color:oklch(22% 0.02 260);overflow-x:hidden">
+
+  <div style="position:fixed;top:-140px;left:-120px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,oklch(90% 0.06 250),transparent 70%);pointer-events:none;z-index:0"></div>
+  <div style="position:fixed;top:40%;right:-160px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,oklch(90% 0.06 330),transparent 70%);pointer-events:none;z-index:0"></div>
+  <div style="position:fixed;bottom:-140px;left:22%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,oklch(90% 0.06 170),transparent 70%);pointer-events:none;z-index:0"></div>
+
+  <div style="position:relative;z-index:1;display:flex;min-height:100vh">
+
+    <div style="width:272px;flex-shrink:0;display:flex;flex-direction:column;padding:20px 14px;gap:22px">
+      <div style="flex:1;display:flex;flex-direction:column;padding:22px 16px;gap:26px;border-radius:28px;background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(20px);border:1px solid oklch(100% 0 0 / 0.65);box-shadow:0 20px 50px oklch(50% 0.06 260 / 0.12);overflow-y:auto">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 6px">
+          <div style="width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,oklch(75% 0.11 250),oklch(72% 0.12 320));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 14px oklch(60% 0.1 280 / 0.3)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(100% 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6z"/></svg>
+          </div>
+          <div style="line-height:1.15">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:16.5px;color:oklch(22% 0.02 260);letter-spacing:0.2px">뉴스 나침반</div>
+            <div style="font-size:11px;color:oklch(52% 0.02 260);margin-top:2px">News Nomad Index</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="font-size:11px;font-weight:600;color:oklch(52% 0.02 260);padding:0 10px 6px;letter-spacing:0.5px">나의 뉴스 습관</div>
+          <sc-for list="{{readerNav}}" as="item" hint-placeholder-count="6">
+            <div style="{{item.rowStyle}}" onClick="{{item.onClick}}">
+              <sc-if value="{{item.iconClipboard}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="1"/><path d="M9 4V3h6v1M9 10h6M9 14h6"/></svg></sc-if>
+              <sc-if value="{{item.iconGauge}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></sc-if>
+              <sc-if value="{{item.iconExpand}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 6M4 4v5M4 4h5M20 20l-6-6M20 20v-5M20 20h-5"/></svg></sc-if>
+              <sc-if value="{{item.iconChecklist}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l1.5 1.5L8 6M10 7h10M4 13l1.5 1.5L8 12M10 13h10M4 19l1.5 1.5L8 18M10 19h10"/></svg></sc-if>
+              <sc-if value="{{item.iconTrend}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l6-6 4 4 6-8M16 6h4v4"/></svg></sc-if>
+              <sc-if value="{{item.iconTimeline}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/><path d="M12 6.5v4M12 13.5v4"/></svg></sc-if>
+              <span>{{item.label}}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="font-size:11px;font-weight:600;color:oklch(52% 0.02 260);padding:0 10px 6px;letter-spacing:0.5px">저널리스트 도구</div>
+          <sc-for list="{{journalistNav}}" as="item" hint-placeholder-count="3">
+            <div style="{{item.rowStyle}}" onClick="{{item.onClick}}">
+              <sc-if value="{{item.iconSend}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L11 13M21 3l-7 18-4-8-8-4z"/></svg></sc-if>
+              <sc-if value="{{item.iconArchive}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5"/><path d="M5 9v10h14V9M10 13h4"/></svg></sc-if>
+              <sc-if value="{{item.iconSettings}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></sc-if>
+              <span>{{item.label}}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px 10px;border-top:1px solid oklch(90% 0.01 260 / 0.7)">
+          <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,oklch(75% 0.11 250),oklch(72% 0.12 320));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:oklch(100% 0 0)">기</div>
+          <div style="line-height:1.2">
+            <div style="font-size:12.5px;font-weight:600;color:oklch(28% 0.02 260)">김기자</div>
+            <div style="font-size:11px;color:oklch(52% 0.02 260)">정치부 · 편집국</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;display:flex;flex-direction:column;min-width:0;padding:20px 24px 20px 0">
+      <div style="height:74px;flex-shrink:0;border-radius:22px;background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);box-shadow:0 10px 30px oklch(50% 0.06 260 / 0.08);display:flex;align-items:center;justify-content:space-between;padding:0 32px;margin-bottom:22px">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:21px;color:oklch(22% 0.02 260)">{{viewTitle}}</div>
+            <sc-if value="{{isDataView}}">
+              <div style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;background:oklch(94% 0.05 70);color:oklch(45% 0.12 70)">예시 데이터</div>
+            </sc-if>
+          </div>
+          <div style="font-size:12.5px;color:oklch(50% 0.02 260);margin-top:2px">{{viewSubtitle}}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="font-size:12.5px;color:oklch(50% 0.02 260)">2026년 7월 21일 화요일</div>
+          <div style="width:1px;height:20px;background:oklch(88% 0.01 260)"></div>
+          <div style="padding:9px 20px;border-radius:999px;background:linear-gradient(135deg,oklch(75% 0.11 250),oklch(72% 0.12 320));color:oklch(100% 0 0);font-size:12.5px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px oklch(60% 0.1 280 / 0.35);white-space:nowrap">이번 주 리포트</div>
+        </div>
+      </div>
+
+      <div style="flex:1;overflow-y:auto;padding:2px 4px 40px">
+
+        <sc-if value="{{isOnboarding}}" hint-placeholder-val="{{false}}">
+        <div style="display:flex;flex-direction:column;gap:22px;max-width:680px">
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:26px;box-shadow:0 16px 40px oklch(50% 0.06 260 / 0.1);padding:30px 32px;display:flex;flex-direction:column;gap:26px">
+            <div>
+              <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">Q1. 주로 뉴스를 보는 시간대</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{obTime}}" as="opt" hint-placeholder-count="4">
+                  <div style="{{opt.style}}" onClick="{{opt.onClick}}">{{opt.label}}</div>
+                </sc-for>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">Q2. 자주 이용하는 채널 (복수 선택)</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{obChannels}}" as="opt" hint-placeholder-count="5">
+                  <div style="{{opt.style}}" onClick="{{opt.onClick}}">{{opt.label}}</div>
+                </sc-for>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">Q3. 하루 평균 뉴스 소비 시간</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{obDuration}}" as="opt" hint-placeholder-count="4">
+                  <div style="{{opt.style}}" onClick="{{opt.onClick}}">{{opt.label}}</div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="padding:15px 22px;border-radius:999px;background:linear-gradient(135deg,oklch(75% 0.11 250),oklch(72% 0.12 320));color:oklch(100% 0 0);font-size:14px;font-weight:700;text-align:center;cursor:pointer;box-shadow:0 12px 28px oklch(60% 0.1 280 / 0.35)" onClick="{{submitOnboarding}}">결과 확인하기 →</div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{isReport}}" hint-placeholder-val="{{true}}">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:1180px">
+
+          <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:linear-gradient(135deg,oklch(90% 0.06 250),oklch(88% 0.07 320));color:oklch(30% 0.1 280);font-size:12.5px;font-weight:700;box-shadow:0 4px 14px oklch(60% 0.08 280 / 0.15)">소속 군집 : {{clusterName}}</div>
+
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+            <sc-for list="{{statCards}}" as="stat" hint-placeholder-count="3">
+              <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:22px 24px">
+                <div style="{{stat.chipStyle}}"></div>
+                <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">{{stat.label}}</div>
+                <div style="display:flex;align-items:baseline;gap:6px">
+                  <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:32px;color:oklch(22% 0.02 260)">{{stat.value}}</div>
+                  <sc-if value="{{stat.suffix}}"><div style="font-size:15px;font-weight:600;color:oklch(50% 0.02 260)">{{stat.suffix}}</div></sc-if>
+                </div>
+                <div style="{{stat.deltaStyle}}">{{stat.deltaText}}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:16px">이번 주 채널 구성</div>
+            <div style="display:flex;height:14px;border-radius:7px;overflow:hidden">
+              <div style="width:1%;background:oklch(75% 0.1 250)"></div>
+              <div style="width:37%;background:oklch(75% 0.1 170)"></div>
+              <div style="width:61%;background:oklch(75% 0.1 330)"></div>
+            </div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:oklch(40% 0.02 260)"><span style="width:9px;height:9px;border-radius:50%;background:oklch(75% 0.1 250)"></span>원문직접(tier0) <b>1%</b></div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:oklch(40% 0.02 260)"><span style="width:9px;height:9px;border-radius:50%;background:oklch(75% 0.1 170)"></span>포털경유(tier1) <b>37%</b></div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:oklch(40% 0.02 260)"><span style="width:9px;height:9px;border-radius:50%;background:oklch(75% 0.1 330)"></span>SNS·영상(tier2) <b>61%</b></div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:stretch">
+            <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+              <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:16px">오늘의 처방</div>
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <sc-for list="{{prescriptions}}" as="rx" hint-placeholder-count="2">
+                  <div style="display:flex;gap:14px;padding:14px;border-radius:16px;background:oklch(100% 0 0 / 0.5);border:1px solid oklch(100% 0 0 / 0.6);cursor:pointer">
+                    <div style="{{rx.chipStyle}}">
+                      <sc-if value="{{rx.iconAlert}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5"/></svg></sc-if>
+                      <sc-if value="{{rx.iconShield}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 4.4-3.4 7.6-8 9-4.6-1.4-8-4.6-8-9V7z"/></svg></sc-if>
+                    </div>
+                    <div style="flex:1">
+                      <div style="font-size:13.5px;font-weight:600;color:oklch(24% 0.02 260)">{{rx.title}}</div>
+                      <div style="font-size:12.5px;color:oklch(50% 0.02 260);margin-top:3px">{{rx.subtitle}}</div>
+                    </div>
+                    <div style="align-self:center;font-size:12px;color:oklch(45% 0.1 280);font-weight:600;white-space:nowrap">확인하기 →</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px;display:flex;flex-direction:column">
+              <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:6px">이탈도(D) 추이</div>
+              <div style="font-size:12px;color:oklch(50% 0.02 260);margin-bottom:18px">최근 8주 · 전체 평균 0.304</div>
+              <div style="flex:1;display:flex;align-items:flex-end;gap:8px;min-height:90px">
+                <div style="width:100%;height:88%;background:oklch(90% 0.05 330);border-radius:5px"></div>
+                <div style="width:100%;height:80%;background:oklch(90% 0.05 330);border-radius:5px"></div>
+                <div style="width:100%;height:72%;background:oklch(90% 0.05 330);border-radius:5px"></div>
+                <div style="width:100%;height:66%;background:oklch(88% 0.06 250);border-radius:5px"></div>
+                <div style="width:100%;height:58%;background:oklch(85% 0.07 250);border-radius:5px"></div>
+                <div style="width:100%;height:50%;background:oklch(82% 0.08 170);border-radius:5px"></div>
+                <div style="width:100%;height:44%;background:oklch(78% 0.09 170);border-radius:5px"></div>
+                <div style="width:100%;height:36%;background:oklch(75% 0.1 170);border-radius:5px"></div>
+              </div>
+              <div style="margin-top:16px;display:inline-flex;align-self:flex-start;padding:5px 12px;border-radius:999px;background:oklch(90% 0.06 170);color:oklch(32% 0.1 170);font-size:12.5px;font-weight:700">8주 전 대비 이탈도 -22%</div>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{isWiden}}" hint-placeholder-val="{{false}}">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:1000px">
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:16px">놓친 반대 관점 3건</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <sc-for list="{{missedViews}}" as="mv" hint-placeholder-count="3">
+                <div style="display:flex;gap:14px;padding:16px;border-radius:16px;background:oklch(100% 0 0 / 0.5);border:1px solid oklch(100% 0 0 / 0.6)">
+                  <div style="width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,oklch(88% 0.08 300),oklch(80% 0.1 320));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:oklch(32% 0.1 300)">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 6M4 4v5M4 4h5M20 20l-6-6M20 20v-5M20 20h-5"/></svg>
+                  </div>
+                  <div style="flex:1">
+                    <div style="font-size:13.5px;font-weight:600">{{mv.title}}</div>
+                    <div style="font-size:12.5px;color:oklch(50% 0.02 260);margin-top:3px">{{mv.subtitle}}</div>
+                  </div>
+                  <div style="align-self:center;font-size:12px;color:oklch(45% 0.1 280);font-weight:600;white-space:nowrap;cursor:pointer">다른 시각 보기 →</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:4px">조각 뉴스 원출처 검증</div>
+            <div style="font-size:12.5px;color:oklch(50% 0.02 260);margin-bottom:16px">숏폼 12건 중 4건 원문 미확인</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{unverified}}" as="uv" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:14px;padding:12px 14px;border:1px solid oklch(100% 0 0 / 0.6);background:oklch(100% 0 0 / 0.4);border-radius:14px">
+                  <div style="flex:1;font-size:13.5px;font-weight:500">{{uv.title}}</div>
+                  <div style="font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:oklch(92% 0.08 25);color:oklch(45% 0.15 25)">원문 미확인</div>
+                  <div style="font-size:12px;color:oklch(45% 0.1 280);font-weight:600;cursor:pointer;white-space:nowrap">출처 확인 →</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{isTidy}}" hint-placeholder-val="{{false}}">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:1000px">
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:16px">결말을 안 본 사건</div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <sc-for list="{{unresolved}}" as="u" hint-placeholder-count="3">
+                <div style="padding:16px;border-radius:16px;background:oklch(100% 0 0 / 0.5);border:1px solid oklch(100% 0 0 / 0.6)">
+                  <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div style="font-size:13.5px;font-weight:600">{{u.title}}</div>
+                    <div style="font-size:12px;color:oklch(45% 0.1 280);font-weight:600;cursor:pointer;white-space:nowrap">이어보기 →</div>
+                  </div>
+                  <div style="font-size:12px;color:oklch(50% 0.02 260);margin:8px 0 8px">파악률 {{u.pct}}%</div>
+                  <div style="height:8px;border-radius:999px;background:oklch(92% 0.01 260);overflow:hidden">
+                    <div style="{{u.barStyle}}"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{isGrowth}}" hint-placeholder-val="{{false}}">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:1000px">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+            <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:22px 24px">
+              <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">이탈도(D) 개선</div>
+              <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:32px;color:oklch(32% 0.1 170)">-15%</div>
+              <div style="font-size:12.5px;color:oklch(50% 0.02 260);margin-top:8px">8주 전 대비</div>
+            </div>
+            <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:22px 24px">
+              <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">나의 NNI</div>
+              <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:32px">0.71</div>
+              <div style="font-size:12.5px;font-weight:600;color:oklch(32% 0.1 170);margin-top:8px">8주 전 0.52 → 상승</div>
+            </div>
+            <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:22px 24px">
+              <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">원문 접점</div>
+              <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:32px">1.4<span style="font-size:15px;font-weight:600;color:oklch(50% 0.02 260)">일/주</span></div>
+              <div style="font-size:12.5px;font-weight:600;color:oklch(32% 0.1 170);margin-top:8px">8주 전 0.3일/주 → 상승</div>
+            </div>
+          </div>
+
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:4px">주간 NNI 추이</div>
+            <div style="font-size:12px;color:oklch(50% 0.02 260);margin-bottom:18px">최근 8주 · 값이 높을수록 균형 잡힌 소비</div>
+            <div style="display:flex;align-items:flex-end;gap:10px;height:140px">
+              <div style="width:100%;height:38%;background:oklch(92% 0.04 250);border-radius:5px"></div>
+              <div style="width:100%;height:44%;background:oklch(90% 0.05 250);border-radius:5px"></div>
+              <div style="width:100%;height:48%;background:oklch(88% 0.06 250);border-radius:5px"></div>
+              <div style="width:100%;height:56%;background:oklch(86% 0.07 250);border-radius:5px"></div>
+              <div style="width:100%;height:64%;background:oklch(83% 0.08 250);border-radius:5px"></div>
+              <div style="width:100%;height:74%;background:oklch(80% 0.09 250);border-radius:5px"></div>
+              <div style="width:100%;height:86%;background:oklch(77% 0.1 250);border-radius:5px"></div>
+              <div style="width:100%;height:100%;background:oklch(74% 0.11 250);border-radius:5px"></div>
+            </div>
+          </div>
+
+          <div style="background:linear-gradient(135deg,oklch(93% 0.05 250),oklch(92% 0.06 320));border-radius:22px;padding:20px 24px;font-size:13.5px;color:oklch(28% 0.06 280);line-height:1.6;border:1px solid oklch(100% 0 0 / 0.5)">8주 전 대비 이탈도(D)가 15% 줄었고, 원문 접점 빈도도 함께 늘고 있어요. 지금 속도라면 다음 리포트에서 &quot;전통-포털 병행층&quot; 군집 진입이 예상됩니다.</div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{isIssue}}" hint-placeholder-val="{{false}}">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:900px">
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">이슈</div>
+            <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:19px;margin-bottom:14px">국회 예산안 협상</div>
+            <div style="font-size:13.5px;line-height:1.7;color:oklch(32% 0.02 260)">여야는 예산안 처리 시한을 앞두고 4주간 협상했으나 기준금리 연동 지원 항목에서 이견을 좁히지 못했습니다. 최종안은 쟁점 항목을 절반으로 줄인 뒤 표결에 부쳐질 예정입니다.</div>
+          </div>
+
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:20px">타임라인</div>
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{timeline}}" as="t" hint-placeholder-count="5">
+                <div style="{{t.rowStyle}}">
+                  <div style="{{t.dotWrapStyle}}"><div style="{{t.dotStyle}}"></div><div style="{{t.lineStyle}}"></div></div>
+                  <div style="{{t.bodyStyle}}">
+                    <div style="font-size:11.5px;color:oklch(50% 0.02 260);margin-bottom:3px">{{t.date}}</div>
+                    <div style="font-size:13.5px;font-weight:600">{{t.title}}</div>
+                    <div style="font-size:12px;color:oklch(50% 0.02 260);margin-top:2px">{{t.source}}</div>
+                  </div>
+                </div>
+                <sc-if value="{{t.isMarker}}">
+                  <div style="display:flex;align-items:center;gap:10px;margin:4px 0 4px 5px">
+                    <div style="width:2px;height:18px;background:oklch(60% 0.13 280)"></div>
+                    <div style="font-size:11.5px;font-weight:700;color:oklch(45% 0.1 280)">— 당신이 마지막 본 지점 —</div>
+                  </div>
+                </sc-if>
+              </sc-for>
+            </div>
+            <div style="margin-top:18px;padding:14px 18px;border-radius:999px;background:linear-gradient(135deg,oklch(90% 0.06 250),oklch(88% 0.07 320));color:oklch(30% 0.1 280);font-size:13px;font-weight:600;text-align:center;cursor:pointer">아직 안 본 결말 이어보기 →</div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{isEngine}}" hint-placeholder-val="{{false}}">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:1180px">
+
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin-bottom:10px">기사 입력</div>
+            <div style="padding:14px 16px;border:1px solid oklch(100% 0 0 / 0.7);border-radius:14px;font-size:15px;font-family:'Pretendard',sans-serif;color:oklch(22% 0.02 260);background:oklch(100% 0 0 / 0.5)">국회 예산안 협상, 막판 쟁점은 무엇이었나</div>
+
+            <div style="font-size:12.5px;font-weight:600;color:oklch(50% 0.02 260);margin:20px 0 10px">타겟 군집</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <sc-for list="{{clusterTabs}}" as="tab" hint-placeholder-count="2">
+                <div style="{{tab.style}}" onClick="{{tab.onClick}}">{{tab.label}}</div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:14px">추천 채널·포맷 <span style="font-family:'Pretendard',sans-serif;font-weight:400;font-size:12.5px;color:oklch(50% 0.02 260)">({{clusterShort}} 기준)</span></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+              <sc-for list="{{channels}}" as="ch" hint-placeholder-count="3">
+                <div style="{{ch.cardStyle}}">
+                  <div style="{{ch.iconWrapStyle}}">
+                    <sc-if value="{{ch.iconPlay}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z"/></svg></sc-if>
+                    <sc-if value="{{ch.iconCard}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 9h18M7 14h4"/></svg></sc-if>
+                    <sc-if value="{{ch.iconTv}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="1"/><path d="M8 3l4 3 4-3"/></svg></sc-if>
+                  </div>
+                  <div style="font-size:14.5px;font-weight:600;margin-top:12px">{{ch.title}}</div>
+                  <div style="{{ch.priorityStyle}}">{{ch.priority}}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:14px">AI 콘텐츠 초안</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+              <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:18px;box-shadow:0 12px 28px oklch(50% 0.06 260 / 0.08);padding:18px;display:flex;align-items:center;gap:12px;cursor:pointer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="oklch(45% 0.1 250)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z"/></svg>
+                <div style="font-size:14px;font-weight:600">쇼츠 스크립트 3안</div>
+              </div>
+              <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:18px;box-shadow:0 12px 28px oklch(50% 0.06 260 / 0.08);padding:18px;display:flex;align-items:center;gap:12px;cursor:pointer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="oklch(45% 0.1 320)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="1"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M4 15l4.5-4.5 3 3L18 7"/></svg>
+                <div style="font-size:14px;font-weight:600">썸네일 4종</div>
+              </div>
+              <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:18px;box-shadow:0 12px 28px oklch(50% 0.06 260 / 0.08);padding:18px;display:flex;align-items:center;gap:12px;cursor:pointer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="oklch(45% 0.1 170)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7"/></svg>
+                <div style="font-size:14px;font-weight:600">TTS 나레이션</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:22px;box-shadow:0 14px 34px oklch(50% 0.06 260 / 0.1);padding:26px 28px">
+            <div style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:18px">지난 배포 성과 <span style="font-family:'Pretendard',sans-serif;font-weight:400;font-size:12.5px;color:oklch(50% 0.02 260)">({{clusterShort}} 대상, 최근 4건 평균)</span></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+              <div>
+                <div style="font-size:12.5px;color:oklch(50% 0.02 260);margin-bottom:6px">도달</div>
+                <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:26px">{{perf.reach}}</div>
+              </div>
+              <div>
+                <div style="font-size:12.5px;color:oklch(50% 0.02 260);margin-bottom:6px">완독률</div>
+                <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:26px">{{perf.complete}}</div>
+              </div>
+              <div>
+                <div style="font-size:12.5px;color:oklch(50% 0.02 260);margin-bottom:6px">원문 클릭률</div>
+                <div style="font-family:'Pretendard',sans-serif;font-weight:700;font-size:26px">{{perf.ctr}}</div>
+              </div>
+            </div>
+            <div style="margin-top:18px;padding-top:16px;border-top:1px solid oklch(90% 0.01 260 / 0.7);font-size:12px;color:oklch(52% 0.02 260)">B2C 앱 실사용 로그 3,200건 반영 — 지난 업데이트 대비 원문 클릭률 예측 정확도 +6%p</div>
+          </div>
+        </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    view: 'report', cluster: 'c0',
+    obTime: null, obChannels: {}, obDuration: null,
+  };
+
+  CLUSTERS = {
+    c0: {
+      name: '디지털 유목민층', short: '군집4',
+      label: '군집4 · 디지털 유목민층 (NNI 0.594)',
+      channels: [
+        { icon: 'play', title: '숏폼·60초', priority: '우선순위 1', disabled: false },
+        { icon: 'card', title: '포털 카드뉴스', priority: '우선순위 2', disabled: false },
+        { icon: 'tv', title: 'TV/지면용', priority: '이 군집엔 생략 권장', disabled: true },
+      ],
+      perf: { reach: '128,400', complete: '41%', ctr: '18%' }
+    },
+    c3: {
+      name: '전방위 옴니보어층', short: '군집1',
+      label: '군집1 · 전방위 옴니보어층 (NNI 0.540)',
+      channels: [
+        { icon: 'tv', title: 'TV/지면용', priority: '우선순위 1', disabled: false },
+        { icon: 'card', title: '포털 카드뉴스', priority: '우선순위 2', disabled: false },
+        { icon: 'play', title: '숏폼·60초', priority: '이 군집엔 생략 권장', disabled: true },
+      ],
+      perf: { reach: '64,200', complete: '67%', ctr: '32%' }
+    }
+  };
+
+  pillStyle(selected) {
+    return 'padding:9px 16px;border-radius:999px;font-size:12.5px;font-weight:600;cursor:pointer;border:1px solid;white-space:nowrap;transition:transform .12s;' +
+      (selected ? 'background:linear-gradient(135deg,oklch(75% 0.11 250),oklch(72% 0.12 320));color:oklch(100% 0 0);border-color:transparent;box-shadow:0 6px 16px oklch(60% 0.1 280 / 0.35);transform:scale(1.02);'
+                : 'background:oklch(100% 0 0 / 0.5);color:oklch(48% 0.02 260);border-color:oklch(100% 0 0 / 0.7);');
+  }
+
+  renderVals() {
+    const view = this.state.view;
+    const cluster = this.state.cluster;
+    const c = this.CLUSTERS[cluster];
+
+    const navBase = 'display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:14px;cursor:pointer;font-size:13.5px;white-space:nowrap;';
+    const buildNav = (defs) => defs.map(d => {
+      const active = view === d.key;
+      const color = d.disabled ? 'oklch(65% 0.01 260)' : (active ? 'oklch(100% 0 0)' : 'oklch(38% 0.02 260)');
+      const icons = { iconClipboard: false, iconGauge: false, iconExpand: false, iconChecklist: false, iconTrend: false, iconTimeline: false, iconSend: false, iconArchive: false, iconSettings: false };
+      icons[d.icon] = true;
+      return {
+        label: d.label, ...icons,
+        rowStyle: navBase + `color:${color};background:${active ? 'linear-gradient(135deg,oklch(75% 0.11 250),oklch(72% 0.12 320))' : 'transparent'};font-weight:${active ? 600 : 500};` + (active ? 'box-shadow:0 6px 16px oklch(60% 0.1 280 / 0.3);' : '') + (d.disabled ? 'cursor:default;' : ''),
+        onClick: d.disabled ? undefined : () => this.setState({ view: d.key }),
+      };
+    });
+
+    const readerNav = buildNav([
+      { key: 'onboarding', label: '온보딩 진단', icon: 'iconClipboard' },
+      { key: 'report', label: '소비 리포트', icon: 'iconGauge' },
+      { key: 'widen', label: '넓히기', icon: 'iconExpand' },
+      { key: 'tidy', label: '정리하기', icon: 'iconChecklist' },
+      { key: 'growth', label: '성장 피드백', icon: 'iconTrend' },
+      { key: 'issue', label: '이슈 상세', icon: 'iconTimeline' },
+    ]);
+    const journalistNav = buildNav([
+      { key: 'engine', label: '배포 최적화 엔진', icon: 'iconSend' },
+      { key: 'archive', label: '리포트 보관함', icon: 'iconArchive', disabled: true },
+      { key: 'settings', label: '설정', icon: 'iconSettings', disabled: true },
+    ]);
+
+    const titles = {
+      onboarding: ['온보딩 진단', '몇 가지 질문으로 나의 뉴스 소비 유형을 진단합니다'],
+      report: ['소비 리포트', '나의 뉴스 소비 편향 리포트'],
+      widen: ['넓히기', '디지털 유목민층 · 편식 교정 액션'],
+      tidy: ['정리하기', '전방위 옴니보어층 · 파편 정리 액션'],
+      growth: ['성장 피드백', '나의 편향 개선 추이'],
+      issue: ['이슈 상세', '타임라인으로 보는 이슈 진행 상황'],
+      engine: ['배포 최적화 엔진', '기사 배포 채널 및 콘텐츠 추천'],
+    };
+
+    const statDefs = [
+      { label: '나의 NNI', value: '0.59', suffix: '', deltaText: '군집4 평균 0.594', hue: 250, down: true },
+      { label: '채널 분산도 (H_norm)', value: '0.39', suffix: '', deltaText: '전체 평균 0.284', hue: 170, down: false },
+      { label: '이탈도 (D_weighted)', value: '0.80', suffix: '', deltaText: '전체 평균 0.304', hue: 330, down: false },
+    ];
+    const statCards = statDefs.map(s => ({
+      label: s.label, value: s.value, suffix: s.suffix, deltaText: s.deltaText,
+      deltaStyle: `font-size:12.5px;font-weight:600;margin-top:8px;color:${s.down ? 'oklch(55% 0.16 25)' : 'oklch(50% 0.02 260)'}`,
+      chipStyle: `width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,oklch(88% 0.08 ${s.hue}),oklch(78% 0.1 ${s.hue + 30}));margin-bottom:14px`,
+    }));
+    const prescriptions = [
+      { iconAlert: true, iconShield: false, title: '이번 주 놓친 반대 관점 3건', subtitle: '기준금리 이슈 · 다른 시각의 보도 확인하기', hue: 330 },
+      { iconAlert: false, iconShield: true, title: '소비한 조각 뉴스 원출처 확인', subtitle: '숏폼 12건 중 4건 원문 미확인', hue: 170 },
+    ].map(rx => ({ ...rx, chipStyle: `width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,oklch(88% 0.08 ${rx.hue}),oklch(78% 0.1 ${rx.hue + 20}));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:oklch(30% 0.1 ${rx.hue})` }));
+
+    const missedViews = [
+      { title: '기준금리 동결, 물가 안정 vs 성장 둔화', subtitle: '보수 성향 매체의 반대 논평 확인하기' },
+      { title: '이민정책 개편안 찬반 공방', subtitle: '진보 성향 매체의 반대 논평 확인하기' },
+      { title: '노동시간 유연화 논쟁', subtitle: '노동계 반대 입장 원문 확인하기' },
+    ];
+    const unverified = [
+      { title: '"금리 동결, 서민경제 직격탄"' },
+      { title: '"예산안 협상 사실상 결렬"' },
+      { title: '"이민정책, 여론조사 뒤집혔다"' },
+      { title: '"노동시간 개편 강행 논란"' },
+    ];
+    const unresolved = [
+      { title: '국회 예산안 협상', pct: 40 },
+      { title: '노동시간 유연화 법안 심사', pct: 65 },
+      { title: '이민정책 개편 공청회', pct: 20 },
+    ].map(u => ({ ...u, barStyle: `height:100%;width:${u.pct}%;background:linear-gradient(135deg,oklch(78% 0.1 250),oklch(75% 0.11 320));border-radius:999px` }));
+
+    const timelineRaw = [
+      { date: '7.10', title: '예산안 협상 개시, 여야 이견 확인', source: '연합뉴스' },
+      { date: '7.14', title: '기준금리 연동 지원안 쟁점 부상', source: '한겨레' },
+      { date: '7.18', title: '여야, 쟁점 항목 절반으로 압축 합의', source: 'YTN' },
+      { date: '7.20', title: '최종안 표결 일정 확정', source: '조선일보' },
+      { date: '7.21', title: '예산안 본회의 통과 여부 주목', source: 'KBS' },
+    ];
+    const lastSeenIdx = 1;
+    const timeline = timelineRaw.map((t, i) => {
+      const seen = i <= lastSeenIdx;
+      return {
+        date: t.date, title: t.title, source: t.source,
+        isMarker: i === lastSeenIdx,
+        rowStyle: 'display:flex;gap:14px;padding:2px 0',
+        dotWrapStyle: 'display:flex;flex-direction:column;align-items:center;width:12px;flex-shrink:0',
+        dotStyle: `width:10px;height:10px;border-radius:50%;background:${seen ? 'oklch(70% 0.01 260)' : 'oklch(60% 0.13 280)'};flex-shrink:0`,
+        lineStyle: i < timelineRaw.length - 1 ? 'width:2px;flex:1;background:oklch(90% 0.01 260);margin-top:2px' : '',
+        bodyStyle: `padding-bottom:22px;opacity:${seen ? '0.55' : '1'}`,
+      };
+    });
+
+    const obTimeOpts = ['출근길', '점심시간', '저녁 이후', '자기 전'].map(label => ({
+      label, style: this.pillStyle(this.state.obTime === label),
+      onClick: () => this.setState({ obTime: label }),
+    }));
+    const obChannelOpts = ['포털 앱', '유튜브·쇼츠', 'SNS 피드', '언론사 앱·사이트', '커뮤니티'].map(label => ({
+      label, style: this.pillStyle(!!this.state.obChannels[label]),
+      onClick: () => this.setState(s => ({ obChannels: { ...s.obChannels, [label]: !s.obChannels[label] } })),
+    }));
+    const obDurationOpts = ['10분 미만', '10~30분', '30분~1시간', '1시간 이상'].map(label => ({
+      label, style: this.pillStyle(this.state.obDuration === label),
+      onClick: () => this.setState({ obDuration: label }),
+    }));
+
+    const tabBase = 'padding:10px 18px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid;white-space:nowrap;';
+    const clusterTabs = ['c0', 'c3'].map(key => {
+      const active = cluster === key;
+      const cc = this.CLUSTERS[key];
+      return {
+        label: cc.label,
+        style: tabBase + (active
+          ? 'background:linear-gradient(135deg,oklch(75% 0.11 250),oklch(72% 0.12 320));color:oklch(100% 0 0);border-color:transparent;box-shadow:0 6px 16px oklch(60% 0.1 280 / 0.35);'
+          : 'background:oklch(100% 0 0 / 0.5);color:oklch(48% 0.02 260);border-color:oklch(100% 0 0 / 0.7);'),
+        onClick: () => this.setState({ cluster: key }),
+      };
+    });
+
+    const channels = c.channels.map(ch => ({
+      iconPlay: ch.icon === 'play', iconCard: ch.icon === 'card', iconTv: ch.icon === 'tv',
+      title: ch.title, priority: ch.priority,
+      cardStyle: `background:oklch(100% 0 0 / 0.55);backdrop-filter:blur(18px);border:1px solid oklch(100% 0 0 / 0.65);border-radius:18px;padding:20px;box-shadow:${ch.disabled ? 'none' : '0 12px 28px oklch(50% 0.06 260 / 0.08)'};` + (ch.disabled ? 'opacity:0.5' : ''),
+      iconWrapStyle: `width:38px;height:38px;border-radius:12px;background:${ch.disabled ? 'oklch(92% 0.008 260)' : `linear-gradient(135deg,oklch(88% 0.08 ${ch.icon === 'play' ? 330 : ch.icon === 'card' ? 170 : 250}),oklch(78% 0.1 ${ch.icon === 'play' ? 350 : ch.icon === 'card' ? 190 : 270}))`};display:flex;align-items:center;justify-content:center;color:${ch.disabled ? 'oklch(55% 0.02 260)' : 'oklch(30% 0.1 280)'}`,
+      priorityStyle: `font-size:12px;font-weight:600;margin-top:6px;color:${ch.disabled ? 'oklch(55% 0.02 260)' : 'oklch(45% 0.1 280)'}`,
+    }));
+
+    return {
+      isOnboarding: view === 'onboarding', isReport: view === 'report', isWiden: view === 'widen',
+      isTidy: view === 'tidy', isGrowth: view === 'growth', isIssue: view === 'issue', isEngine: view === 'engine',
+      isDataView: ['report','widen','tidy','growth','engine','issue'].includes(view),
+      viewTitle: titles[view][0], viewSubtitle: titles[view][1],
+      readerNav, journalistNav,
+      clusterName: c.name, statCards, prescriptions, missedViews, unverified, unresolved, timeline,
+      obTime: obTimeOpts, obChannels: obChannelOpts, obDuration: obDurationOpts,
+      submitOnboarding: () => {
+        const chosen = this.state.obChannels;
+        const nomadic = chosen['유튜브·쇼츠'] || chosen['SNS 피드'];
+        this.setState({ view: 'report', cluster: nomadic ? 'c0' : 'c3' });
+      },
+      clusterTabs, clusterShort: c.short, channels, perf: c.perf,
+    };
+  }
+}
+
+</script>
+</body>
+</html>
