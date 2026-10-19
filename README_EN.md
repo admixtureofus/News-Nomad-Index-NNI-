@@ -144,6 +144,13 @@ Key lessons included:
 - Feature transformations can substantially affect distance-based clustering when input variables are highly skewed.
 - A strong internal clustering metric does not replace substantive interpretation or external validation.
 
+## Awards & Recognition
+
+- **[Exellence Award]** — [Media Statistics Analysis & Utilization Competition]
+  - Team project with 4 members
+  - [News Article](https://url.kr/bfhnmq)
+
+
 ---
 
 *This repository documents an analytical project using survey data. Any redistribution of the underlying survey microdata should follow the applicable data-use terms and privacy requirements.*
